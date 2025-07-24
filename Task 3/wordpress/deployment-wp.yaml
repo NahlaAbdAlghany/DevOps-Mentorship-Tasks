@@ -4,7 +4,6 @@ metadata:
   name: wordpress
   labels:
     app: wordpress
-    component: application
 spec:
   replicas: 2
   selector:
