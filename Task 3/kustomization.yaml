@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: wordpress
+
+resources:
+  - namespace.yaml
+  - secrets.yaml
+  - mariadb/db-deployment.yaml
+  - mariadb/db-pvc.yaml
+  - mariadb/svc.yaml
+  - wordpress/deployment-wp.yaml
+  - wordpress/pvc-wordpress.yaml
+  - wordpress/svc.yaml
+
+  
