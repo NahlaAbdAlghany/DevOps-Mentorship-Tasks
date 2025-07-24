@@ -4,9 +4,8 @@ kind: Kustomization
 namespace: wordpress
 
 resources:
-  - namespace.yaml
-  - secrets.yaml
-  - mariadb/
-  - wordpress/
+  - db-deployment.yaml
+  - db-pvc.yaml
+  - svc.yaml
 
-  
+
