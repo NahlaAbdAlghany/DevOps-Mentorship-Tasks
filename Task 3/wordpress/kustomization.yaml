@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: wordpress
+
+resources:
+  - deployment-wp.yaml
+  - pvc-wordpress.yaml
+  - svc.yaml
+  - loadbalancer.yaml
+
+patchesStrategicMerge:
+  - service-patch.yaml
