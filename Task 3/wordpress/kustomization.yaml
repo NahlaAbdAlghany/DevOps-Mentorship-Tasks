@@ -6,7 +6,6 @@ namespace: wordpress
 resources:
   - deployment-wp.yaml
   - pvc-wordpress.yaml
-  - svc.yaml
   - loadbalancer.yaml
 
 patchesStrategicMerge:
