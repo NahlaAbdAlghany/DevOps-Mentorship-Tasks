@@ -7,5 +7,6 @@ resources:
   - db-deployment.yaml
   - db-pvc.yaml
   - svc.yaml
+  - db-secrets.yaml
 
 
