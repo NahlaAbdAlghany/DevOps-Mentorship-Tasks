@@ -9,8 +9,8 @@ resources:
 secretGenerator:
 - name: my-repo-secret
   literals:
-  - username=argocd
-  - password=glpat-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
+  - username=NahlaAbdAlghany
+  - password=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
   - url=https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks.git
 
 patches:
