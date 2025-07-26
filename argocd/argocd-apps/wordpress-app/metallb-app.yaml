@@ -4,7 +4,7 @@ metadata:
   name: argocd-metallb
   namespace: argocd
 spec:
-  project: default
+  project: cluster-apps
   source:
     repoURL: 'https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks.git'
     path: "metallb"
