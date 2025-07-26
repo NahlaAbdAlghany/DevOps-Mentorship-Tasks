@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-mariadb
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks.git'
+    path: "Task 3/mariadb"
+    targetRevision: main
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: mariadb
+  syncPolicy:
+    automated:
+      selfHeal: true
+      enabled: true
+    syncOptions:
+    - CreateNamespace=true

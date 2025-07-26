@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-wordpress
+  name: argocd-metallb
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: 'https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks.git'
-    path: Task 3
+    path: "metallb"
     targetRevision: main
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: wordpress
+    namespace: metallb-system
   syncPolicy:
     automated:
       selfHeal: true
