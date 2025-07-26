@@ -34,7 +34,7 @@ kubectl apply -k base/
 - I used nginx to reverse the proxy of the loadbalncer svc like that `https://external-ip:port`
 now I can access argocd UI.
 
-## Argocd-Projects 
+## Argocd-Application
 - from UI i created `default` project that accept * namespaces and for metallb created custom project with cluster permissions [cluster-app-project.yaml](https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks/blob/main/argocd/argocd-apps/wordpress-app/cluster-app-project.yaml). 
 - create application for each app [argocd-aap/](https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks/tree/main/argocd/argocd-apps/wordpress-app)
  ```sh
