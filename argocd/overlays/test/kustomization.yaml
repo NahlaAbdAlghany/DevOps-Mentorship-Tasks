@@ -6,6 +6,10 @@ resources:
 - ../../base
 - ./files/loadbalancer-svc.yaml
 
+
+patchesStrategicMerge:
+  - service-patch.yaml
+
 # secretGenerator:
 # - name: my-repo-sec
 #   literals:
