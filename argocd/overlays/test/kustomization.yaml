@@ -8,7 +8,7 @@ resources:
 
 
 patchesStrategicMerge:
-  - service-patch.yaml
+  - svc-patch.yaml
 
 # secretGenerator:
 # - name: my-repo-sec
