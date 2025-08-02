@@ -8,5 +8,6 @@ resources:
   - db-pvc.yaml
   - svc.yaml
   - db-secrets.yaml
+  - pv-db.yaml
 
 
