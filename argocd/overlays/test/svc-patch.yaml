@@ -5,4 +5,4 @@ metadata:
   namespace: argocd
 
   annotations:
-    metallb.io/loadBalancerIPs: 10.0.0.200
+    metallb.io/loadBalancerIPs: 10.0.0.55
