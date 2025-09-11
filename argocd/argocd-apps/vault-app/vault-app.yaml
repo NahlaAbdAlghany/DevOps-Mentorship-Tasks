@@ -20,6 +20,8 @@ spec:
             size: 10Gi
         ui:
           enabled: true
+          serviceType: "LoadBalancer"
+          servicePort: 8200 
         injector:
           enabled: true
   destination:
