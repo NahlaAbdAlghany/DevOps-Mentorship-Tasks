@@ -51,6 +51,7 @@ spec:
           dataStorage:
             enabled: true
             size: 10Gi
+            storageClass: rook-ceph-block
 
           ui:
             enabled: true
