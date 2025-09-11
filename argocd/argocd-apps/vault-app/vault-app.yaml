@@ -15,21 +15,58 @@ spec:
           ha:
             enabled: true
             replicas: 3
+            raft:
+              enabled: true
+              setNodeId: true
+              config: |
+                ui = true
+
+                listener "tcp" {
+                  tls_disable = 1
+                  address = "0.0.0.0:8200"
+                  cluster_address = "0.0.0.0:8201"
+                }
+
+                storage "raft" {
+                  path = "/vault/data"
+
+                  retry_join {
+                    leader_api_addr = "http://vault-0.vault-internal:8200"
+                  }
+
+                  retry_join {
+                    leader_api_addr = "http://vault-1.vault-internal:8200"
+                  }
+
+                  retry_join {
+                    leader_api_addr = "http://vault-2.vault-internal:8200"
+                  }
+                }
+
+                disable_mlock = true
+
+                cluster_addr = "http://POD_IP:8201"
+                api_addr = "http://POD_IP:8200"
+
           dataStorage:
             enabled: true
             size: 10Gi
-        ui:
-          enabled: true
-          serviceType: "LoadBalancer"
-          servicePort: 8200 
-        injector:
-          enabled: true
+
+          ui:
+            enabled: true
+            serviceType: "LoadBalancer"
+            servicePort: 8200
+
+          injector:
+            enabled: true
+
   destination:
     server: https://kubernetes.default.svc
     namespace: vault
+
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
