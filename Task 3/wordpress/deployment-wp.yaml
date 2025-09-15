@@ -29,7 +29,7 @@ spec:
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql-secret
+              name: wp-secret
               key: wp-password
         resources:
           requests:
