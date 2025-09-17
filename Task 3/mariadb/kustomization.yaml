@@ -8,6 +8,7 @@ resources:
   - db-pvc.yaml
   - svc.yaml
   - db-secrets.yaml
+  - vault-token.yml
   
 
 
