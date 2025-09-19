@@ -9,6 +9,6 @@ patchesStrategicMerge:
 resources:
 - install.yaml
 - plugin.yaml
-- vault-rbac.yaml
+
 
 
