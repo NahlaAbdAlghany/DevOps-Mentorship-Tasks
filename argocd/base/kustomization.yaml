@@ -3,5 +3,12 @@ kind: Kustomization
 
 namespace: argocd
 
+patchesStrategicMerge:
+  - argocd-repo-server-patch.yaml
+
 resources:
 - install.yaml
+- plugin.yaml
+- vault-rbac.yaml
+
+
