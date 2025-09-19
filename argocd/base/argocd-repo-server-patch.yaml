@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: applications.argoproj.io
+  name: argocd-repo-server
 spec:
   template:
     spec:
