@@ -3,5 +3,10 @@ kind: L2Advertisement
 metadata:
   name: default
   namespace: metallb-system
-spec: {}
+spec: 
+ ipAddressPools:
+  - default-pool
+ interfaces:
+  - vmbr1
+
 
