@@ -6,7 +6,7 @@ metadata:
 spec: 
  ipAddressPools:
   - default-pool
- interfaces:
-  - vmbr1
+#  interfaces:
+#   - vmbr1
 
 
