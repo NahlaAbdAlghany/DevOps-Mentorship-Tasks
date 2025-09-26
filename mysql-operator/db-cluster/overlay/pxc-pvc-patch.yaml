@@ -3,12 +3,11 @@ kind: PerconaXtraDBCluster
 metadata:
   name: cluster1
 spec:
-  storage:
-    volumeClaimTemplate:
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        storageClassName: rook-ceph-block
+  pxc:
+    volumeSpec:
+      persistentVolumeClaim:
+        storageClassName: rook-ceph-block 
+        accessModes:  "ReadWriteOnce" 
         resources:
           requests:
             storage: 6Gi
