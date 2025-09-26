@@ -187,7 +187,7 @@ spec:
 #        path: /data
 #        type: Directory
       persistentVolumeClaim:
-        storageClassName: rook-ceph-block
+        # storageClassName: rook-ceph-block
         accessModes: [ "ReadWriteOnce" ]
 #        dataSource:
 #          name: new-snapshot-test
