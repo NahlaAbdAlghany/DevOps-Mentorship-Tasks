@@ -1,7 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: mysql-cluster
+  name: mysql-cluster-db
+  namespace: argocd
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
@@ -10,21 +11,21 @@ spec:
       elements:
       - cluster: DB-cluster
         url: https://kubernetes.default.svc
-        namespace: mysql-cluster
-        appName: mysql-cluster
+        namespace: argocd
+        appName: mysql-cluster-db
         path: mysql-operator/db-cluster
   template:
     metadata:
-      name: '{{appName}}'
+      name: "mysql-cluster-db"
     spec:
       project: default
       source:
         repoURL: 'https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks.git'
         targetRevision: main
-        path: '{{path}}'
+        path: '{{.path}}'
       destination:
-        server: '{{url}}'
-        namespace: '{{namespace}}'
+        server: '{{.url}}'
+        namespace: '{{.namespace}}'
       syncPolicy:
         automated:
           selfHeal: true
