@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: mysql-cluster
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+      - cluster: mysql-operator
+        url: https://kubernetes.default.svc
+        namespace: mysql-cluster
+        appName: mysql-operator
+        path: mysql-operator/
+  template:
+    metadata:
+      name: '{{appName}}'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks.git'
+        targetRevision: main
+        path: '{{path}}'
+      destination:
+        server: '{{url}}'
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
