@@ -7,7 +7,8 @@ spec:
     volumeSpec:
       persistentVolumeClaim:
         storageClassName: rook-ceph-block 
-        accessModes:  "ReadWriteOnce" 
+        accessModes:  
+        - ReadWriteOnce
         resources:
           requests:
             storage: 6Gi
