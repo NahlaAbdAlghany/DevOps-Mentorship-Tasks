@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-wordpress
+  name: argocd-mysql-cluster
   namespace: argocd
 spec:
   project: default
