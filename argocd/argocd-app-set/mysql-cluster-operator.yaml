@@ -11,7 +11,7 @@ spec:
       elements:
       - cluster: mysql-operator
         url: https://kubernetes.default.svc
-        namespace: argocd
+        namespace: mysql-cluster
         appName: mysql-operator
         path: mysql-operator/
   template:
