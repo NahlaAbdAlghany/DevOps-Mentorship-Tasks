@@ -9,8 +9,6 @@ spec:
     repoURL: 'https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks.git'
     path: "mysql-operator/"
     targetRevision: main
-    plugin:
-      name: argocd-vault-plugin-v1.0
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: mysql-cluster
