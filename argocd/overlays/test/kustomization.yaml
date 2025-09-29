@@ -9,19 +9,5 @@ resources:
 
 patchesStrategicMerge:
   - svc-patch.yaml
-
-# secretGenerator:
-# - name: my-repo-sec
-#   literals:
-#   - username=argocd
-#   - password=glpat-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
-#   - url=https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks.git
-
-# patches:
-#   - patch: |-
-#       apiVersion: v1
-#       kind: Secret
-#       metadata:
-#         name: my-repo-secret
-#         labels:
-#           argocd.argoproj.io/secret-type: repo-creds
+  - argocd-repo-server-patch.yaml
+  - argocd-cm.yaml

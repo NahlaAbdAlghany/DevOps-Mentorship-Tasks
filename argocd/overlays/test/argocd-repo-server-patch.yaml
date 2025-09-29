@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+spec:
+  template:
+    spec:
+      volumes:
+        - name: custom-tools
+          emptyDir: {}
+        - name: sops-age
+          secret:
+            secretName: sops-age
+      initContainers:
+      - name: install-tools
+        image: alpine:3.18
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            set -e
+            apk add --no-cache curl tar bash gnupg
+             # Ensure dirs exist
+            mkdir -p /custom-tools/bin
+            mkdir -p /custom-tools/kustomize-plugins/viaduct.ai/v1
+    
+            echo "Installing sops..."
+            curl -L -o /custom-tools/sops \
+              https://github.com/getsops/sops/releases/download/v3.9.0/sops-v3.9.0.linux.amd64
+            chmod +x /custom-tools/sops
+            cp /custom-tools/sops /custom-tools/bin/sops
+    
+            echo "Installing ksops..."
+            curl -s https://raw.githubusercontent.com/viaduct-ai/kustomize-sops/master/scripts/install-ksops-archive.sh \
+              | bash -s /custom-tools
+    
+           
+    
+            # Copy ksops to both plugin and PATH
+            cp /custom-tools/ksops /custom-tools/bin/ksops
+            cp /custom-tools/ksops /custom-tools/kustomize-plugins/viaduct.ai/v1/ksops
+            chmod +x /custom-tools/bin/ksops /custom-tools/kustomize-plugins/viaduct.ai/v1/ksops
+    
+            echo "Tools installed."
+        volumeMounts:
+          - mountPath: /custom-tools
+            name: custom-tools
+      containers:
+        - name: argocd-repo-server
+          env:
+            - name: PATH
+              value: "/custom-tools/bin:/usr/local/bin:/usr/bin:/bin"
+            - name: KUSTOMIZE_PLUGIN_HOME
+              value: /custom-tools/kustomize-plugins
+          volumeMounts:
+            - mountPath: /custom-tools
+              name: custom-tools
+            - name: sops-age
+              mountPath: /etc/sops/age
+              readOnly: true
