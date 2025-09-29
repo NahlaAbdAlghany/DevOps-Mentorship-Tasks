@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks.git'
     path: "Task 3/mariadb"
-    targetRevision: main
+    targetRevision: sops-hashiCorpVault
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: mariadb
