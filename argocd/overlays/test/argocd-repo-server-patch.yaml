@@ -8,9 +8,12 @@ spec:
       volumes:
         - name: custom-tools
           emptyDir: {}
-        - name: sops-age
+        # - name: sops-age
+        #   secret:
+        #     secretName: sops-age
+        - name: vault-creds
           secret:
-            secretName: sops-age
+            secretName: secrets-vault
       initContainers:
       - name: install-tools
         image: alpine:3.18
@@ -51,9 +54,23 @@ spec:
               value: "/custom-tools/bin:/usr/local/bin:/usr/bin:/bin"
             - name: KUSTOMIZE_PLUGIN_HOME
               value: /custom-tools/kustomize-plugins
+            # Vault credentials for SOPS
+            - name: VAULT_ADDR
+              valueFrom:
+                secretKeyRef:
+                  name: secrets-vault
+                  key: VAULT_ADDR
+            - name: VAULT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: secrets-vault
+                  key: VAULT_TOKEN
           volumeMounts:
             - mountPath: /custom-tools
               name: custom-tools
-            - name: sops-age
-              mountPath: /etc/sops/age
+            # - name: sops-age
+            #   mountPath: /etc/sops/age
+            #   readOnly: true
+            - name: vault-creds
+              mountPath: /etc/vault
               readOnly: true
