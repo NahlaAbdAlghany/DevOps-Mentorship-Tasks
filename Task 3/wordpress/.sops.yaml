@@ -1,7 +1,7 @@
 creation_rules:
-  - path_regex: secrets/db-secrets.yaml
+  - path_regex: secrets/wp-secret.yaml
     hc_vault_transit_uri: "http://10.0.0.58:8200/v1/sops/keys/firstkey"
     # hc_vault_transit_key_name: "firstkey"
     hc_vault_addr: "http://10.0.0.58:8200"
     hc_vault_auth_method: "token"
-    hc_vault_token_path: "./mariadb/vault-token.yml"
+    hc_vault_token_path: "./wordpress/vault-token.yml"
