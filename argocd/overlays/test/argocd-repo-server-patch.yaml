@@ -4,13 +4,10 @@ metadata:
   name: argocd-repo-server
 spec:
   template:
-    spec:
+    spec:    
       volumes:
         - name: custom-tools
           emptyDir: {}
-        # - name: sops-age
-        #   secret:
-        #     secretName: sops-age
         - name: vault-creds
           secret:
             secretName: secrets-vault
@@ -48,7 +45,7 @@ spec:
           - mountPath: /custom-tools
             name: custom-tools
       containers:
-        - name: argocd-repo-server
+        - name: argocd-repo-server     
           env:
             - name: PATH
               value: "/custom-tools/bin:/usr/local/bin:/usr/bin:/bin"
@@ -68,9 +65,6 @@ spec:
           volumeMounts:
             - mountPath: /custom-tools
               name: custom-tools
-            # - name: sops-age
-            #   mountPath: /etc/sops/age
-            #   readOnly: true
             - name: vault-creds
               mountPath: /etc/vault
               readOnly: true
