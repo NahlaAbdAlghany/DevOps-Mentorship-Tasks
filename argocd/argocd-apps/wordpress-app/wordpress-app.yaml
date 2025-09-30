@@ -8,9 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks.git'
     path: "Task 3/wordpress"
-    targetRevision: main
-    plugin:
-      name: argocd-vault-plugin-v1.0
+    targetRevision: sops-hashiCorpVault
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: wordpress
