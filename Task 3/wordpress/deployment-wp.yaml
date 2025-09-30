@@ -21,7 +21,7 @@ spec:
         - containerPort: 80
         env:
         - name: WORDPRESS_DB_HOST
-          value: "cluster1-haproxy:3306"
+          value: cluster1-haproxy.mysql-cluster.svc.cluster.local:3306
         - name: WORDPRESS_DB_NAME
           value: wordpress
         - name: WORDPRESS_DB_USER
