@@ -6,3 +6,4 @@ resources:
 
 patchesStrategicMerge:
 - pvc-patch.yaml
+- svc-patch.yaml
