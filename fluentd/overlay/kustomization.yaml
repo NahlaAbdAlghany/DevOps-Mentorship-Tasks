@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
 - ../base
 -  fluentd-rbac.yaml
+- daemonset-patch.yaml
