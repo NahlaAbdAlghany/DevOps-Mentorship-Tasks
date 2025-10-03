@@ -32,6 +32,7 @@ spec:
         volumeMounts:
         - name: fluentd-config
           mountPath: /fluentd/etc/fluent.conf
+          subPath: fluent.conf
       volumes:
       - name: fluentd-config
         configMap:
