@@ -3,6 +3,4 @@ kind: Kustomization
 
 resources:
 - ../base
-
-patchesStrategicMerge:
-  - fluentd-rbac.yaml
+-  fluentd-rbac.yaml
