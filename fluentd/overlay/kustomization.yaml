@@ -7,3 +7,5 @@ resources:
 
 patchesStrategicMerge:
 - daemonset-patch.yaml
+generators:
+  - ksops-config.yaml

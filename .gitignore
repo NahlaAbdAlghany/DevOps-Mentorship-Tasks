@@ -1,2 +1,3 @@
 Task 3/mariadb/vault-token.yml
 Task 3/wordpress/vault-token.yml
+fluentd/overlay/vault-token.yml
