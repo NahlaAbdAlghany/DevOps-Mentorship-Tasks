@@ -1,0 +1,12 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: quickstart
+  annotations:
+    metallb.io/loadBalancerIPs: 10.0.0.60
+spec:
+  version: 9.1.4
+  http:
+    service:
+      spec:
+        type: LoadBalancer
