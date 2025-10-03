@@ -8,6 +8,7 @@ spec:
     volumeClaimTemplates:
     - metadata:
         name: elasticsearch-data
+        namespace: esk-cluster
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:
