@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: fluentd
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+      - cluster: fluentd
+        url: https://kubernetes.default.svc
+        namespace: kube-system
+        appName: fluentd
+        path: fluentd/overlay
+  template:
+    metadata:
+      name: "fluentd"
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks.git'
+        targetRevision: main
+        path: '{{.path}}'
+      destination:
+        server: '{{.url}}'
+        namespace: '{{.namespace}}'
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        syncOptions:
+        - CreateNamespace=true
