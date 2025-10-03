@@ -7,7 +7,8 @@ resources:
   - deployment-wp.yaml
   - pvc-wordpress.yaml
   - loadbalancer.yaml
-  - secrets.yaml
 
 patchesStrategicMerge:
   - service-patch.yaml
+generators:
+  - ksops-config.yaml
