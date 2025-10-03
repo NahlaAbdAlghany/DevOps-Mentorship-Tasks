@@ -4,10 +4,9 @@ kind: Kustomization
 namespace: mariadb
 
 resources:
-  - db-deployment.yaml
+  - db-statefulset.yaml
   - db-pvc.yaml
   - svc.yaml
-  - db-secrets.yaml
-  
 
-
+generators:
+    - ksops-config.yaml
