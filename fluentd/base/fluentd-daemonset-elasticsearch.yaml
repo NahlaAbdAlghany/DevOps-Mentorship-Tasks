@@ -48,8 +48,8 @@ spec:
           # =====================
           - name: FLUENT_ELASTICSEARCH_USER
             value: "elastic"
-          - name: FLUENT_ELASTICSEARCH_PASSWORD
-            value: "changeme"
+          # - name: FLUENT_ELASTICSEARCH_PASSWORD
+          #   value: "changeme"
           # Logz.io Authentication
           # ======================
           - name: LOGZIO_TOKEN
