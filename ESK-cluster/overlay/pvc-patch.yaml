@@ -5,6 +5,7 @@ metadata:
 spec:
   nodeSets:
   - name: default
+    count: 3
     volumeClaimTemplates:
     - metadata:
         name: elasticsearch-data
