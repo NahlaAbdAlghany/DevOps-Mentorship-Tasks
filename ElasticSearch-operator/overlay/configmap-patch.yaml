@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: elastic-operator
-  namespace: esk-operator
+  #namespace: esk-operator
 data:
   eck.yaml: |-
     log-verbosity: 0
