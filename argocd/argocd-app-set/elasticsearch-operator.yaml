@@ -12,8 +12,8 @@ spec:
       - cluster: ElasticSearch-operator
         url: https://kubernetes.default.svc
         namespace: elasticsearch-operator
-        appName: ElasticSearch-operator
-        path: ElasticSearch-cluster/overlay
+        appName: esk-operator
+        path: ElasticSearch-operator/overlay
   template:
     metadata:
       name: "elasticsearch-operator"
