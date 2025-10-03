@@ -31,7 +31,7 @@ spec:
               fieldRef:
                 fieldPath: spec.nodeName
           - name:  FLUENT_ELASTICSEARCH_HOST
-            value: "https://10.0.0.61:9200"
+            value: "quickstart-es-http.esk-cluster.svc.cluster.local"
           - name:  FLUENT_ELASTICSEARCH_PORT
             value: "9200"
           - name: FLUENT_ELASTICSEARCH_SCHEME
