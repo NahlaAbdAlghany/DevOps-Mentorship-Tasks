@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - ../base
 -  fluentd-rbac.yaml
+- configmap.yaml
 
 patchesStrategicMerge:
 - daemonset-patch.yaml

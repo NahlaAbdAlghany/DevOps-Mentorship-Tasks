@@ -29,3 +29,10 @@ spec:
             secretKeyRef:
               name: quickstart-es-elastic-user
               key: elastic
+        volumeMounts:
+        - name: fluentd-config
+          mountPath: /fluentd/etc/fluent.conf
+      volumes:
+      - name: fluentd-config
+        configMap:
+          name: fluentd-config
