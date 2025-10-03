@@ -18,7 +18,7 @@ spec:
     metadata:
       name: "fluentd"
     spec:
-      project: default
+      project: cluster-apps
       source:
         repoURL: 'https://github.com/NahlaAbdAlghany/DevOps-Mentorship-Tasks.git'
         targetRevision: main
