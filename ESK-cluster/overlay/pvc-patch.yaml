@@ -1,15 +1,16 @@
-apiVersion: monitoring.coreos.com/v1
+apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
 metadata:
   name: quickstart
-  namespace: esk-cluster
 spec:
-  storage:
-    volumeClaimTemplate:
+  nodeSets:
+  - name: default
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
       spec:
-        accessModes:
-        - ReadWriteOnce
-        storageClassName: rook-ceph-block
+        accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: 8Gi
+            storage: 10Gi
+        storageClassName: rook-ceph-block
