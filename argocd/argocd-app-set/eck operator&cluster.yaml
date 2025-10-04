@@ -13,13 +13,13 @@ spec:
         url: https://kubernetes.default.svc
         namespace: eck-operator
         appName: elasticsearch-operator
-        path: ElasticSearch-operator/overlay
+        path: eck-operator/base
         syncWave: "1"
       - cluster: elasticsearch
         url: https://kubernetes.default.svc
         namespace: eck-cluster
         appName: elasticsearch-cluster
-        path: ESK-cluster/overlay
+        path: eck-cluster/overlay
         syncWave: "2"
   template:
     metadata:

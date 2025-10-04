@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: esk-operator
+  name: eck-operator
   labels:
     name: elastic-system
 ---
