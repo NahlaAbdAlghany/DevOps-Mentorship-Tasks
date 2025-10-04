@@ -40,6 +40,3 @@
 - op: replace
   path: /webhooks/13/clientConfig/service/namespace
   value: eck-operator
-- op: replace
-  path: /webhooks/14/clientConfig/service/namespace
-  value: eck-operator
