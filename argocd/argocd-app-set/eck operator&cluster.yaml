@@ -11,7 +11,7 @@ spec:
       elements:
       - cluster: elasticsearch
         url: https://kubernetes.default.svc
-        namespace: eck-operator
+        namespace: elastic-system
         appName: elasticsearch-operator
         path: eck-operator/base
         syncWave: "1"
