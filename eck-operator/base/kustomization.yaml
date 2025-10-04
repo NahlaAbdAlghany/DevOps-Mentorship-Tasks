@@ -4,3 +4,19 @@ kind: Kustomization
 resources:
  - crds.yaml
  - operator.yaml
+
+patches:
+  - path: ns-patch.yaml
+    target:
+      kind: Namespace
+      name: eck-operator
+  -  path: configmap-patch.yaml
+     target:
+      kind: ConfigMap
+      name: elastic-operator
+      namespace: eck-operator
+  
+  - path: webhook-patch.yaml
+    target:
+      kind: ValidatingWebhookConfiguration
+      name: elastic-webhook.k8s.elastic.co
