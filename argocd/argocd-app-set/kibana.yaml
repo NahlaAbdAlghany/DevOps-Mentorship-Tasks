@@ -11,7 +11,7 @@ spec:
       elements:
       - cluster: kibana
         url: https://kubernetes.default.svc
-        namespace: esk-cluster
+        namespace: eck-cluster
         appName: kibana
         path: kibana/overlay
   template:
