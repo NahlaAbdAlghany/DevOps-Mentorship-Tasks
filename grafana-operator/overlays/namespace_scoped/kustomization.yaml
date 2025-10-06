@@ -1,4 +1,4 @@
-namespace: grafana-operator
+#namespace: grafana-operator
 
 resources:
   - ../../base
