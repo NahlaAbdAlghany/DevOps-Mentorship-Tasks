@@ -1,24 +1,3 @@
----
-# Grafana CR - Connect operator to your existing Grafana
-apiVersion: grafana.integreatly.org/v1beta1
-kind: Grafana
-metadata:
-  name: grafana-instance
-  namespace: monitoring
-  labels:
-    dashboards: "grafana"
-spec:
-  # Reference your existing Grafana deployment
-  external:
-    url: "http://grafana.monitoring.svc.cluster.local:3000"
-    # If your Grafana has authentication, reference the secret
-    # adminUser: admin
-    # adminPassword:
-    #   name: grafana-admin-credentials
-    #   key: password
-
----
-# Now you can create GrafanaDashboard CRDs
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
