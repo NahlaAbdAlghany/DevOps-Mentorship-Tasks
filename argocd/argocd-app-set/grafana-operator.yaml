@@ -4,14 +4,14 @@ metadata:
   name: grafana-operator
   namespace: argocd
 spec:
-  #  goTemplate: true
+  goTemplate: true
   #goTemplateOptions: ["missingkey=error"]
   generators:
   - list:
       elements:
       - cluster: in-cluster
         url: https://kubernetes.default.svc
-        namespace:  grafana-operator
+        namespace:  monitoring
         appName: grafana-operator
         path: grafana-operator/overlays/namespace_scoped
   template:
@@ -30,5 +30,3 @@ spec:
         automated:
           selfHeal: true
           prune: true
-        syncOptions:
-        - CreateNamespace=true

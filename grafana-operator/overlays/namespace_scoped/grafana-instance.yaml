@@ -2,7 +2,7 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: pvc-usage-dashboard
-  namespace: grafana-operator
+  namespace: monitoring
 spec:
   # This tells the operator which Grafana instance to use
   instanceSelector:
