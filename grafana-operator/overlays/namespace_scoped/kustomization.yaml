@@ -2,6 +2,7 @@ namespace: monitoring
 
 resources:
   - ../../base
+  - grafana-instance.yaml
 
 patches:
   - path: deployment.yaml
