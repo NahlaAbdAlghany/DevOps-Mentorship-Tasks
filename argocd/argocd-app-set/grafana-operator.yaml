@@ -11,7 +11,7 @@ spec:
       elements:
       - cluster: ElasticSearch-cluster
         url: https://kubernetes.default.svc
-        namespace:  monitoring
+        namespace:  grafana-operator
         appName: grafana-operator
         path: grafana-operator/overlays/namespace_scoped
   template:

@@ -1,4 +1,4 @@
-namespace: monitoring
+namespace: grafana-operator
 
 resources:
   - ../../base
