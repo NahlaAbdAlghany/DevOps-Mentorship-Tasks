@@ -9,7 +9,7 @@ spec:
   generators:
   - list:
       elements:
-      - cluster: kibana
+      - cluster: in-cluster
         url: https://kubernetes.default.svc
         namespace: eck-cluster
         appName: kibana

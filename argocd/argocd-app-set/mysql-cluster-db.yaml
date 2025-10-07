@@ -9,7 +9,7 @@ spec:
   generators:
   - list:
       elements:
-      - cluster: DB-cluster
+      - cluster: in-cluster
         url: https://kubernetes.default.svc
         namespace: mysql-cluster
         appName: mysql-cluster-db

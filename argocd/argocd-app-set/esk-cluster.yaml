@@ -9,7 +9,7 @@ spec:
   generators:
   - list:
       elements:
-      - cluster: ElasticSearch-cluster
+      - cluster: in-cluster
         url: https://kubernetes.default.svc
         namespace: esk-cluster
         appName: esk-cluster

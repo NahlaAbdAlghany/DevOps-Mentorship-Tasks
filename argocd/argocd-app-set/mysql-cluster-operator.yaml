@@ -9,7 +9,7 @@ spec:
   generators:
   - list:
       elements:
-      - cluster: mysql-operator
+      - cluster: in-cluster
         url: https://kubernetes.default.svc
         namespace: mysql-cluster
         appName: mysql-operator
