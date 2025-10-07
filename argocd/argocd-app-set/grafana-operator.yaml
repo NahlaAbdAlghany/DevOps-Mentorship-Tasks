@@ -30,3 +30,7 @@ spec:
         automated:
           selfHeal: true
           prune: true
+      ignoreDifferences:
+      - group: ""
+        kind: Namespace
+        name: default
