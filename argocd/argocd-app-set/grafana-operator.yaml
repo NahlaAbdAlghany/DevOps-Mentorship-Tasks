@@ -29,7 +29,6 @@ spec:
       syncPolicy:
         automated:
           selfHeal: true
-          prune: true
       ignoreDifferences:
       - group: ""
         kind: Namespace
