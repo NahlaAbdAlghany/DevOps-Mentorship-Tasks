@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
  - crds.yaml
  - operator.yaml
+ - clean-up-job.yaml
 
 # patches:
 #   - path: ns-patch.yaml
