@@ -33,8 +33,8 @@ data:
       emit_invalid_record_to_error false
       <parse>
         @type regexp
-          expression /^(?<remote_addr>[^ ]+) - (?<remote_user>[^ ]+) \[(?<time_local>[^\]]+)\] "(?<method>[A-Z]+) (?<path>[^ ]+) (?<protocol>[^"]+)" (?<status_code>\d+) (?<body_bytes_sent>\d+) "(?<http_referer>[^"]*)" "(?<http_user_agent>[^"]*)" (?<response_time_us>\d+)$/
-          types status_code:integer,body_bytes_sent:integer,response_time_us:integer
+        expression /^(?<remote_addr>[^ ]+) - (?<remote_user>[^ ]+) \[(?<time_local>[^\]]+)\] "(?<method>[A-Z]+) (?<path>[^ ]+) (?<protocol>[^"]+)" (?<status_code>\d+) (?<body_bytes_sent>\d+) "(?<http_referer>[^"]*)" "(?<http_user_agent>[^"]*)" (?<response_time_us>\d+)$/
+        types status_code:integer,body_bytes_sent:integer,response_time_us:integer
       </parse>
     </filter>
 
