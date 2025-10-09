@@ -7,16 +7,4 @@ spec:
   count: 1
   elasticsearchRef:
     name: quickstart
-  config:
-    elasticsearch.username: elastic
-    elasticsearch.password: ${ELASTICSEARCH_PASSWORD}
-  podTemplate:
-    spec:
-      containers:
-      - name: kibana
-        env:
-        - name: ELASTICSEARCH_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: quickstart-es-elastic-user
-              key: elastic
+  
