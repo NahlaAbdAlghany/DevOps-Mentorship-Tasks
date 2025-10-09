@@ -2,6 +2,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: elasticsearch-stack
+  # finalizers: 
+  # - resources-finalizer.argocd.argoproj.io
   namespace: argocd
 spec:
   goTemplate: true
@@ -11,18 +13,27 @@ spec:
       elements:
       - cluster: in-cluster
         url: https://kubernetes.default.svc
-        env: test
+        env: operator
         namespace: elastic-system
         appName: elasticsearch-operator
         path: eck-operator/base
         syncWave: "1"
+      - cluster: in-cluster
+        url: https://kubernetes.default.svc
+        namespace: eck-cluster
+        appName: elasticsearch-cluster
+        path: eck-cluster/overlay
+        env: cluster
+        syncWave: "2"
+       
   template:
     metadata:
       name: "{{.appName}}"
       annotations:
         argocd.argoproj.io/sync-wave: "{{.syncWave}}"
-      finalizers:
-      - resources-finalizer.argocd.argoproj.io/background
+      finalizers: 
+      - resources-finalizer.argocd.argoproj.io
+      
     spec:
       project: default
       source:
@@ -45,13 +56,6 @@ spec:
         # - ApplyOutOfSyncOnly=false
   strategy:
     type: RollingSync
-    rollingSync:
-      steps:
-      - matchExpressions:
-        - key: name
-          operator: In
-          values:
-          - test
     deletionOrder: reverse
   syncPolicy:
     applicationsSync: create-update
