@@ -3,13 +3,15 @@ kind: DaemonSet
 metadata:
   name: fluentd
   namespace: kube-system
-  annotations:
-    reloader.stakater.com/match: "true"
+  
   labels:
     k8s-app: fluentd-logging
     version: v1
 spec:
   template:
+    metadata:
+      annotations:
+        reloader.stakater.com/match: "true"
     spec:
       serviceAccountName: fluentd
       containers:
