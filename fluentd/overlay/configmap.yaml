@@ -85,5 +85,6 @@ data:
       logstash_format true
       logstash_prefix fluentd
       include_tag_key true
+      pipeline add_namespace_field
       type_name _doc
     </match>
