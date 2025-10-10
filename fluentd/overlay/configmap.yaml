@@ -47,6 +47,17 @@ data:
       </record>
     </filter>
 
+    # Add a source to test reloading
+    <source>
+      @type exec
+      tag test.reload
+      command echo '{"message":"FLUENTD CONFIG RELOADED - TEST SUCCESSFUL", "timestamp":"'$(date -Iseconds)'"}'
+      run_interval 10s
+      <parse>
+       @type json
+      </parse>
+    </source>
+
     # Send logs to Elasticsearch
     <match kube.**>
       @type elasticsearch
