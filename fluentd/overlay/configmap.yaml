@@ -51,7 +51,7 @@ data:
     <source>
       @type exec
       tag test.reload
-      command echo '{"message":"FLUENTD CONFIG RELOADED TEST SUCCESSFUL", "timestamp":"'$(date -Iseconds)'"}'
+      command echo '{"message":"FLUENTD CONFIG RELOADED TEST 2 SUCCESSFUL", "timestamp":"'$(date -Iseconds)'"}'
       run_interval 10s
       <parse>
         @type json
