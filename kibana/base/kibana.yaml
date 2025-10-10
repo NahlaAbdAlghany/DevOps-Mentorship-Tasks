@@ -2,8 +2,6 @@ apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
   name: quickstart
-  annotations:
-    reloader.stakater.com/match: "true"
 spec:
   version: 9.1.4
   count: 1
