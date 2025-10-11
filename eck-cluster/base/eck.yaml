@@ -8,6 +8,7 @@ spec:
   - name: default
     count: 3
     config:
+      xpack.http.compatibility_mode: true
       node.roles: ["master", "data", "ingest"]
       cluster.initial_master_nodes: ["quickstart-es-default-0","quickstart-es-default-1","quickstart-es-default-2"]
       node.store.allow_mmap: false
