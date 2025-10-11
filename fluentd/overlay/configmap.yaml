@@ -82,9 +82,16 @@ data:
       user "#{ENV['FLUENT_ELASTICSEARCH_USER']}"
       password "#{ENV['FLUENT_ELASTICSEARCH_PASSWORD']}"
       ssl_verify "#{ENV['FLUENT_ELASTICSEARCH_SSL_VERIFY']}"
-      logstash_format true
+      # logstash_format true
       logstash_prefix fluentd
       include_tag_key true
       pipeline add_namespace_field
       type_name _doc
+      # Use rollover alias instead of daily index
+      index_name fluentd-write
+    
+      # ILM integration
+      ilm_enabled true
+      ilm_policy test_policy
+      ilm_rollover_alias fluentd-write
     </match>
