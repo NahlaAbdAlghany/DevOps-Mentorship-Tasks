@@ -87,11 +87,26 @@ data:
       include_tag_key true
       pipeline add_namespace_field
       type_name _doc
-      # Use rollover alias instead of daily index
-      index_name fluentd-write
-    
-      # ILM integration
-      ilm_enabled true
-      ilm_policy test_policy
+
+
+      # Index and Alias Configuration
+      application_name fluentd
+      index_name fluentd
+      
+      # This creates the write alias automatically
       ilm_rollover_alias fluentd-write
+      
+      # Template configuration
+      template_name fluentd-template
+      template_overwrite true
+
+      # Customize index date format for rollover
+      index_date_pattern ""
+      deflector_alias fluentd-write
+      
+    
+      # ILM Configuration
+      enable_ilm true
+      ilm_policy_id test_policy
+      ilm_policy_overwrite false
     </match>
