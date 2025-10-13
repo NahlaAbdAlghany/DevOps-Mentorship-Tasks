@@ -4,4 +4,4 @@ creation_rules:
     # hc_vault_transit_key_name: "firstkey"
     hc_vault_addr: "http://10.0.0.58:8200"
     hc_vault_auth_method: "token"
-    hc_vault_token_path: "./vault-token.yml"
+    hc_vault_token_path: "./overlay/vault-token.yml"
