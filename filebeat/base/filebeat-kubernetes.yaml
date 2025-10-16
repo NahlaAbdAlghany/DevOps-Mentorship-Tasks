@@ -157,9 +157,10 @@ data:
     cloud.auth: ${ELASTIC_CLOUD_AUTH}
 
     output.elasticsearch:
-      hosts: ['${ELASTICSEARCH_HOST:elasticsearch}:${ELASTICSEARCH_PORT:9200}']
+      hosts: ['${ELASTICSEARCH_SCHEME:https}://${ELASTICSEARCH_HOST:elasticsearch}:${ELASTICSEARCH_PORT:9200}']
       username: ${ELASTICSEARCH_USERNAME}
       password: ${ELASTICSEARCH_PASSWORD}
+      ssl.verification_mode: none
 ---
 apiVersion: apps/v1
 kind: DaemonSet
