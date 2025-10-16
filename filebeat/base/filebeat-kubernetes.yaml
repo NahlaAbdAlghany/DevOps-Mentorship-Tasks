@@ -202,9 +202,9 @@ spec:
             secretKeyRef:
               name: quickstart-es-elastic-user
               key: elastic
-        - name: FLUENT_ELASTICSEARCH_SCHEME
+        - name: ELASTICSEARCH_SCHEME
           value: "https"
-        - name: FLUENT_ELASTICSEARCH_SSL_VERIFY
+        - name: ELASTICSEARCH_SSL_VERIFY
           value: "false"
         - name: ELASTIC_CLOUD_ID
           value:
