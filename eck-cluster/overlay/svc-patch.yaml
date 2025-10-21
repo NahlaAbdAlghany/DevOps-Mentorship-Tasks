@@ -4,6 +4,7 @@ metadata:
   name: quickstart
   annotations:
     metallb.io/loadBalancerIPs: 10.0.0.60
+    kube-vip.io/ignore: "true"
 spec:
   version: 9.1.4
   http:
