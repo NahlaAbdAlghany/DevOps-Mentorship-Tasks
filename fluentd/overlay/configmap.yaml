@@ -19,6 +19,12 @@ data:
       </parse>
     </source>
 
+       # ⭐ EXCLUDE FLUENTD'S OWN LOGS 
+    <match kube.var.log.containers.fluentd-**>
+      @type null
+    </match>
+
+
     # Add Kubernetes metadata
     <filter kube.**>
       @type kubernetes_metadata
