@@ -14,5 +14,5 @@ spec:
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: 4Gi
+            storage: 8Gi
         storageClassName: rook-ceph-block
