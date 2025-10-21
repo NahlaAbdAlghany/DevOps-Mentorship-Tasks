@@ -58,7 +58,7 @@ spec:
             value: "kubernetes"
         resources:
           requests:
-            memory: 200Mi
+            memory: 400Mi
             cpu: 100m
           limits:
             cpu: 500m
