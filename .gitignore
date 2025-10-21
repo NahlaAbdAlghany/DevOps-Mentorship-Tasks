@@ -1,4 +1,6 @@
 Task 3/mariadb/vault-token.yml
 Task 3/wordpress/vault-token.yml
-# filebeat/overlay/vault-token.yml
+filebeat/overlay/vault-token.yml
+fluentd/overlay/vault-token.yml
+argocd/overlays/test/vaullt-token.yaml
 
