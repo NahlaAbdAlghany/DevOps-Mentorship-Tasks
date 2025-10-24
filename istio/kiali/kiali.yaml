@@ -319,6 +319,8 @@ kind: Deployment
 metadata:
   name: kiali
   namespace: "istio-system"
+  annotations:
+     reloader.stakater.com/auto: "true"
   labels:
     
     helm.sh/chart: kiali-server-2.12.0

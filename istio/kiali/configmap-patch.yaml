@@ -96,6 +96,13 @@ data:
         root_namespace: istio-system
       prometheus:
         url: "http://prometheus-k8s.monitoring.svc.cluster.local:9090"
+      grafana:
+        url: "http://grafana.monitoring.svc.cluster.local:3000"
+        auth:
+          enabled: enabled
+          type: basic
+          username: admin
+          password: admin
       tracing:
         enabled: false
     identity:
