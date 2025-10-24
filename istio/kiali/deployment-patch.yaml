@@ -1,0 +1,3 @@
+- op: add
+  path: /metadata/annotations/reloader.stakater.com~1auto
+  value: "true"
