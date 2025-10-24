@@ -3,3 +3,10 @@ kind: Kustomization
 
 resources:
 - kiali.yaml
+
+patches:
+  - target:
+      kind: Service
+      name: kiali
+      namespace: istio-system
+    path: svc-patch.yaml
