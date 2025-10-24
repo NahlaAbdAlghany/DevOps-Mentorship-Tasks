@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
 - bookinfo.yaml
 - bookinfo-versions.yaml
+- bookinfo-gateway.yaml
