@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
 - kiali.yaml
+- service-monitor.yaml
 
 patchesStrategicMerge:
   - configmap-patch.yaml
