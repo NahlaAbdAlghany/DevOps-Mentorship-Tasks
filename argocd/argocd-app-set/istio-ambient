@@ -14,6 +14,13 @@ spec:
         namespace: istio-system
         appName: istio-ambient
         path: istio/ambient/base
+
+      - cluster: in-cluster
+        url: https://kubernetes.default.svc
+        namespace: istio-system
+        appName: kiali
+        path: istio/kiali
+
   template:
     metadata:
       name: "istio-ambient"
