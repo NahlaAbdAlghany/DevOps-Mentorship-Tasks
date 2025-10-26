@@ -8,3 +8,4 @@ resources:
 - bookinfo-gateway.yaml
 - authorization-policy.yaml
 - curl.yaml
+- L7-authorization-policy.yaml
