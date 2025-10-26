@@ -13,3 +13,4 @@ spec:
     - source:
         principals:
         - cluster.local/ns/default/sa/bookinfo-gateway-istio
+        - cluster.local/ns/default/sa/waypoint
