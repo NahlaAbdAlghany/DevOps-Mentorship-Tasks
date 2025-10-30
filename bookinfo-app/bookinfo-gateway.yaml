@@ -39,5 +39,3 @@ spec:
     backendRefs:
     - name: productpage
       port: 9080
-    - name: reviews
-      port: 9080
