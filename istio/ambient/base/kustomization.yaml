@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
 - ambient-install.yaml
 - service-monitor.yaml
+- peer-authentication.yaml
