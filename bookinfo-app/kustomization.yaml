@@ -6,6 +6,8 @@ resources:
 - bookinfo.yaml
 - bookinfo-versions.yaml
 - bookinfo-gateway.yaml
+- waypoint.yaml
+- virtual-service.yaml
 #- L4-authorization-policy.yaml
 - curl.yaml
 #- L7-authorization-policy.yaml
