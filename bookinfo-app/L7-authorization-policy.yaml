@@ -14,6 +14,7 @@ spec:
     - source:
         principals:
         - cluster.local/ns/bookinfo-app/sa/curl
+        - cluster.local/ns/bar/sa/curl
     to:
     - operation:
         methods: ["GET"]
