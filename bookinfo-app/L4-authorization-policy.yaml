@@ -12,5 +12,5 @@ spec:
   - from:
     - source:
         principals:
-        - cluster.local/ns/default/sa/bookinfo-gateway-istio
-        - cluster.local/ns/default/sa/waypoint
+        - cluster.local/ns/bookinfo-app/sa/bookinfo-gateway-istio
+        #- cluster.local/ns/bookinfo-app/sa/waypoint
