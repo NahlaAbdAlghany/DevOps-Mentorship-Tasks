@@ -14,3 +14,4 @@ spec:
         principals:
         - cluster.local/ns/bookinfo-app/sa/bookinfo-gateway-istio
         - cluster.local/ns/bookinfo-app/sa/waypoint
+        - cluster.local/ns/bar/sa/curl
