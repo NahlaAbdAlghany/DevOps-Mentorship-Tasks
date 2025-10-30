@@ -10,4 +10,4 @@ resources:
 - virtual-service.yaml
 - L4-authorization-policy.yaml
 #- curl.yaml
-#- L7-authorization-policy.yaml
+- L7-authorization-policy.yaml
