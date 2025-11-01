@@ -9,4 +9,4 @@ resources:
 - waypoint.yaml
 - L4-authorization-policy.yaml
 - L7-authorization-policy.yaml
-- split-traffic-review.yaml
+# - split-traffic-review.yaml
