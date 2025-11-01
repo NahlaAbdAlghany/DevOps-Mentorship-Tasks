@@ -14,5 +14,5 @@ spec:
         principals:
         - cluster.local/ns/bookinfo-app/sa/bookinfo-gateway-istio
         - cluster.local/ns/bookinfo-app/sa/waypoint
-        # - cluster.local/ns/bar/sa/waypoint
-        # - cluster.local/ns/bar/sa/curl
+        # - cluster.local/ns/bar/sa/waypoint  -- this not needed as waypoint proxy in bar namespace is not calling productpage``
+        # - cluster.local/ns/bar/sa/curl -- this not needed as curl in bar namespace is not calling productpage, we need to label the namespace with ambient anyway
