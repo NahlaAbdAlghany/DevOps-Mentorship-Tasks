@@ -47,8 +47,10 @@ metadata:
   namespace: bookinfo-app
 spec:
   parentRefs:
-  - name: bookinfo-gateway
-    namespace: bookinfo-app
+  - group: ""           
+    kind: Service       # Attach to Service, not Gateway
+    name: reviews       # The reviews service
+    port: 9080
   rules:
   - matches:
     - headers:
