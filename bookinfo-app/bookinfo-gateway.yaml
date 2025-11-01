@@ -39,3 +39,24 @@ spec:
     backendRefs:
     - name: productpage
       port: 9080
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: reviews
+  namespace: bookinfo-app
+spec:
+  parentRefs:
+  - name: bookinfo-gateway
+    namespace: bookinfo-app
+  rules:
+  - matches:
+    - headers:
+      - name: end-user
+        value: Dave
+    backendRefs:
+    - name: reviews-v2
+      port: 9080
+  - backendRefs:
+    - name: reviews-v1
+      port: 9080

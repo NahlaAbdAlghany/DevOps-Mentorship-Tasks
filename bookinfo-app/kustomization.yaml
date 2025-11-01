@@ -7,7 +7,6 @@ resources:
 - bookinfo-versions.yaml
 - bookinfo-gateway.yaml
 - waypoint.yaml
-- virtual-service.yaml
 - L4-authorization-policy.yaml
 - L7-authorization-policy.yaml
 - split-traffic-review.yaml
