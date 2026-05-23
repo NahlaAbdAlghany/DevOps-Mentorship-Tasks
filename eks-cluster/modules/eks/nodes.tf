@@ -46,6 +46,13 @@ resource "aws_eks_node_group" "nodes" {
   capacity_type  = var.capacity_type
   instance_types = var.instance_types
 
+  # Cluster Autoscaler discovers managed node groups via these tags on the
+  # underlying ASG. Both tags must be present for auto-discovery to work.
+  tags = {
+    "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned"
+    "k8s.io/cluster-autoscaler/enabled"             = "true"
+  }
+
   launch_template {
     id      = aws_launch_template.eks_nodes.id
     version = aws_launch_template.eks_nodes.latest_version

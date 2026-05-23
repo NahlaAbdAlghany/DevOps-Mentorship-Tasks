@@ -83,5 +83,5 @@ variable "min_size" {
 variable "max_size" {
   description = "Maximum number of worker nodes (for auto-scaling)"
   type        = number
-  default     = 3
+  default     = 6
 }

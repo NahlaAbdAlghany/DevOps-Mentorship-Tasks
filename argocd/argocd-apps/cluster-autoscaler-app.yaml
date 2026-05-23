@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-autoscaler
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  source:
+    repoURL: https://kubernetes.github.io/autoscaler
+    chart: cluster-autoscaler
+    targetRevision: 9.46.6
+    helm:
+      values: |
+        cloudProvider: aws
+        awsRegion: us-west-2
+
+        autoDiscovery:
+          clusterName: my-cluster
+
+        # system-cluster-critical is a built-in priority class (priority 2000000000).
+        # It lets the autoscaler preempt lower-priority pods to get scheduled even
+        # when worker nodes are full — without this, the autoscaler goes Pending and
+        # can never trigger a scale-up.
+        priorityClassName: system-cluster-critical
+
+        rbac:
+          serviceAccount:
+            name: cluster-autoscaler
+            create: true
+            # No annotations needed — Pod Identity injects credentials automatically
+            # via aws_eks_pod_identity_association in Terraform.
+
+        extraArgs:
+          balance-similar-node-groups: "true"
+          # Allow scale-down of nodes running system pods (DaemonSets are excluded
+          # automatically). Without this, nodes with kube-proxy/vpc-cni pods are
+          # never considered for scale-down.
+          skip-nodes-with-system-pods: "false"
+          scale-down-delay-after-add: 2m
+          scale-down-unneeded-time: 2m
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

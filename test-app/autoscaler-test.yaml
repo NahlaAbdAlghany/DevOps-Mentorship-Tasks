@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autoscaler-test
+  namespace: default
+spec:
+  replicas: 20
+  selector:
+    matchLabels:
+      app: autoscaler-test
+  template:
+    metadata:
+      labels:
+        app: autoscaler-test
+    spec:
+      containers:
+        - name: pause
+          image: registry.k8s.io/pause:3.9
+          resources:
+            requests:
+              cpu: 400m
+              memory: 256Mi

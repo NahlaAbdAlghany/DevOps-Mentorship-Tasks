@@ -39,6 +39,13 @@ resource "aws_eks_addon" "addons" {
   # OVERWRITE lets Terraform re-apply addon config even if it was changed outside Terraform
   resolve_conflicts_on_create = "OVERWRITE"
   resolve_conflicts_on_update = "OVERWRITE"
+
+  # coredns and aws-ebs-csi-driver are Deployments that need nodes to schedule on.
+  # Wait for both node groups to be ready before creating any addon.
+  depends_on = [
+    aws_eks_node_group.nodes,
+    aws_eks_node_group.argocd,
+  ]
 }
 
 # ─── Pod Identity Associations ───────────────────────────────────────────────
@@ -51,8 +58,6 @@ resource "aws_eks_pod_identity_association" "ebs_csi" {
   namespace       = "kube-system"
   service_account = "ebs-csi-controller-sa"
   role_arn        = aws_iam_role.ebs_csi_role.arn
-
-  depends_on = [aws_eks_addon.addons]
 }
 
 resource "aws_eks_pod_identity_association" "cert_manager" {
@@ -60,8 +65,13 @@ resource "aws_eks_pod_identity_association" "cert_manager" {
   namespace       = "cert-manager"
   service_account = "cert-manager"
   role_arn        = aws_iam_role.cert_manager_role.arn
+}
 
-  depends_on = [aws_eks_addon.addons]
+resource "aws_eks_pod_identity_association" "cluster_autoscaler" {
+  cluster_name    = aws_eks_cluster.cluster.name
+  namespace       = "kube-system"
+  service_account = "cluster-autoscaler"
+  role_arn        = aws_iam_role.cluster_autoscaler_role.arn
 }
 
 

@@ -120,3 +120,60 @@ resource "aws_iam_role" "cert_manager_role" {
     }]
   })
 }
+
+# ─── Cluster Autoscaler Role ──────────────────────────────────────────────────
+# Pod Identity: the eks-pod-identity-agent assumes this role on behalf of the
+# cluster-autoscaler service account in kube-system. The association is in eks.tf.
+
+resource "aws_iam_role" "cluster_autoscaler_role" {
+  name = "ClusterAutoscalerRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Principal = {
+        Service = "pods.eks.amazonaws.com"
+      }
+      Action = [
+        "sts:AssumeRole",
+        "sts:TagSession"
+      ]
+    }]
+  })
+}
+
+resource "aws_iam_role_policy" "cluster_autoscaler_policy" {
+  name = "ClusterAutoscalerPolicy"
+  role = aws_iam_role.cluster_autoscaler_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "autoscaling:DescribeAutoScalingGroups",
+          "autoscaling:DescribeAutoScalingInstances",
+          "autoscaling:DescribeLaunchConfigurations",
+          "autoscaling:DescribeScalingActivities",
+          "autoscaling:DescribeTags",
+          "ec2:DescribeImages",
+          "ec2:DescribeInstanceTypes",
+          "ec2:DescribeLaunchTemplateVersions",
+          "ec2:GetInstanceTypesFromInstanceRequirements",
+          "eks:DescribeNodegroup"
+        ]
+        Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "autoscaling:SetDesiredCapacity",
+          "autoscaling:TerminateInstanceInAutoScalingGroup"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}

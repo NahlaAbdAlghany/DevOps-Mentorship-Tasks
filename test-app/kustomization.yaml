@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - svc.yaml
-  - httproute.yaml
+  #- httproute.yaml
