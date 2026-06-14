@@ -15,7 +15,7 @@ resource "aws_eks_cluster" "cluster" {
     endpoint_private_access = true
     endpoint_public_access  = true
   }
-  bootstrap_self_managed_addons = false
+  bootstrap_self_managed_addons = true
   # Control plane log types sent to CloudWatch Logs.
   # api:           all kubectl requests to the API server
   # audit:         who did what to which resource (important for security)
