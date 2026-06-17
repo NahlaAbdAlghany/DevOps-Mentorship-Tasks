@@ -1,0 +1,85 @@
+# kube-prometheus-stack values — EKS-tuned.
+# Consumed by argocd/argocd-apps/kube-prometheus-stack-app.yaml via $values ref.
+
+# ─── Control-plane scrapers ───────────────────────────────────────────────────
+# EKS runs the control plane for you and does NOT expose etcd, the scheduler, or
+# the controller-manager. Leaving these enabled just creates permanently "down"
+# scrape targets that turn your "targets" panel red for no reason. Disable all 3.
+kubeScheduler:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeEtcd:
+  enabled: false
+
+# ─── Prometheus ───────────────────────────────────────────────────────────────
+prometheus:
+  prometheusSpec:
+    # Keep 15 days of history. retentionSize is a safety cap and must stay BELOW
+    # the PVC size below — Prometheus needs headroom for compaction + WAL. If the
+    # disk fills to 100%, ingestion stops and the TSDB can corrupt.
+    retention: 15d
+    retentionSize: 8GB
+
+    # Persist the time-series DB on an EBS volume (via your EBS CSI driver, which
+    # is already wired through Pod Identity) instead of the chart default
+    # emptyDir, which loses ALL history on a pod restart.
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: gp3
+          accessModes: ["ReadWriteOnce"]   # EBS is single-node → always RWO
+          resources:
+            requests:
+              storage: 10Gi
+
+    # Prometheus is memory-hungry; usage scales with active series. Real requests
+    # let the scheduler place it sensibly; the limit stops it evicting neighbours
+    # on a small node.
+    resources:
+      requests:
+        cpu: 500m
+        memory: 1Gi
+      limits:
+        memory: 2Gi
+
+# ─── Alertmanager ─────────────────────────────────────────────────────────────
+alertmanager:
+  alertmanagerSpec:
+    # Small PVC so active silences / notification state survive a restart.
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: gp3
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 2Gi
+
+# ─── Grafana ──────────────────────────────────────────────────────────────────
+grafana:
+  # cert-manager is commented out for now, so expose Grafana directly through an
+  # AWS load balancer instead of an HTTPRoute + TLS cert.
+  # NOTE: this is plain HTTP. When you re-enable cert-manager + Envoy Gateway,
+  # switch type back to ClusterIP and route through an HTTPRoute for TLS.
+  service:
+    type: LoadBalancer
+    # Default provisions a Classic ELB. Uncomment for a Network Load Balancer:
+    # annotations:
+    #   service.beta.kubernetes.io/aws-load-balancer-type: nlb
+
+  # Persist Grafana's own SQLite DB (dashboards you create, datasources, prefs).
+  persistence:
+    enabled: true
+    storageClassName: gp3
+    accessModes: ["ReadWriteOnce"]
+    size: 5Gi
+
+  # With an RWO volume + the default rolling update, a new pod can't mount the
+  # disk still held by the old pod → rollout deadlock. Recreate fixes that.
+  deploymentStrategy:
+    type: Recreate
+
+  # CHANGE THIS. Fine to inline for a lab; for anything real, set
+  # admin.existingSecret to a Kubernetes Secret instead of committing it to git.
+  adminPassword: "change-me-now"
