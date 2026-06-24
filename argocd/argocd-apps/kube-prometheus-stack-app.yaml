@@ -28,11 +28,19 @@ spec:
       kind: CustomResourceDefinition
       jsonPointers:
         - /metadata/annotations/kubectl.kubernetes.io~1last-applied-configuration
+    - group: ""
+      kind: PersistentVolumeClaim
+      name: kube-prometheus-stack-grafana
+      namespace: monitoring
+      jsonPointers:
+        - /spec/volumeName
 
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-      - ServerSideApply=true
+      - Replace=true
       - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+      
