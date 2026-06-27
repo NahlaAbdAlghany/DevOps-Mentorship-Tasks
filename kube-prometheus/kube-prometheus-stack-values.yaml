@@ -84,3 +84,17 @@ grafana:
     existingSecret: grafana-admin-secret
     userKey: admin-user
     passwordKey: admin-password
+
+  # Mount the Secret as files and point Grafana at them via __FILE env vars.
+  # Grafana reads these paths on every startup and updates the DB if the value
+  # changed — so rotating the secret in AWS + restarting the pod is enough,
+  # no manual API call needed.
+  extraSecretMounts:
+    - name: grafana-admin-secret
+      secretName: grafana-admin-secret
+      mountPath: /etc/secrets/grafana-admin
+      readOnly: true
+
+  env:
+    GF_SECURITY_ADMIN_USER__FILE: /etc/secrets/grafana-admin/admin-user
+    GF_SECURITY_ADMIN_PASSWORD__FILE: /etc/secrets/grafana-admin/admin-password
