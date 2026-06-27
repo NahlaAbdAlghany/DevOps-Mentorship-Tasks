@@ -177,3 +177,44 @@ resource "aws_iam_role_policy" "cluster_autoscaler_policy" {
     ]
   })
 }
+
+# ─── External Secrets Operator Role ──────────────────────────────────────────
+# Pod Identity: the eks-pod-identity-agent assumes this role on behalf of the
+# external-secrets service account. ESO uses it to read secrets from AWS
+# Secrets Manager. The association is defined in eks.tf.
+
+resource "aws_iam_role" "external_secrets_role" {
+  name = "ExternalSecretsRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Principal = {
+        Service = "pods.eks.amazonaws.com"
+      }
+      Action = [
+        "sts:AssumeRole",
+        "sts:TagSession"
+      ]
+    }]
+  })
+}
+
+resource "aws_iam_role_policy" "external_secrets_policy" {
+  name = "ExternalSecretsPolicy"
+  role = aws_iam_role.external_secrets_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Action = [
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:DescribeSecret"
+      ]
+      # Scope to only secrets under the "eks/" prefix to follow least-privilege.
+      Resource = "arn:aws:secretsmanager:*:*:secret:eks/*"
+    }]
+  })
+}
