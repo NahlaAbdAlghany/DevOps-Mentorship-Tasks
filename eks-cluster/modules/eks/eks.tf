@@ -74,12 +74,6 @@ resource "aws_eks_pod_identity_association" "cluster_autoscaler" {
   role_arn        = aws_iam_role.cluster_autoscaler_role.arn
 }
 
-resource "aws_eks_pod_identity_association" "external_secrets" {
-  cluster_name    = aws_eks_cluster.cluster.name
-  namespace       = "external-secrets"
-  service_account = "external-secrets"
-  role_arn        = aws_iam_role.external_secrets_role.arn
-}
 
 
 

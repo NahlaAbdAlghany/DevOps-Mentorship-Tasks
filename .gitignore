@@ -1,3 +1,7 @@
 clientLibraryConfig-nahla-aws.json
-*.json 
+*.json
 *.tfstate
+
+# Sealed Secrets — local working files, never commit these
+sealed-secrets/*.pem
+sealed-secrets/*-raw.yaml
