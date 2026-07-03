@@ -27,3 +27,8 @@ output "node_group_arn" {
   description = "EKS node group ARN"
   value       = aws_eks_node_group.nodes.arn
 }
+
+output "sops_kms_key_arn" {
+  description = "KMS key ARN for SOPS — paste into .sops.yaml after terraform apply"
+  value       = aws_kms_key.secrets.arn
+}

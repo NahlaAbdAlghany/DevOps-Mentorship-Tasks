@@ -178,13 +178,12 @@ resource "aws_iam_role_policy" "cluster_autoscaler_policy" {
   })
 }
 
-# ─── External Secrets Operator Role ──────────────────────────────────────────
-# Pod Identity: the eks-pod-identity-agent assumes this role on behalf of the
-# external-secrets service account. ESO uses it to read secrets from AWS
-# Secrets Manager. The association is defined in eks.tf.
+# ─── ArgoCD Repo Server Role ─────────────────────────────────────────────────
+# Pod Identity: the argocd-repo-server pod assumes this role so SOPS can call
+# KMS to decrypt secret manifests at sync time. The association is in eks.tf.
 
-resource "aws_iam_role" "external_secrets_role" {
-  name = "ExternalSecretsRole"
+resource "aws_iam_role" "argocd_repo_server_role" {
+  name = "ArgoCDRepoServerRole"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -201,20 +200,19 @@ resource "aws_iam_role" "external_secrets_role" {
   })
 }
 
-resource "aws_iam_role_policy" "external_secrets_policy" {
-  name = "ExternalSecretsPolicy"
-  role = aws_iam_role.external_secrets_role.id
+resource "aws_iam_role_policy" "argocd_repo_server_kms_policy" {
+  name = "ArgoCDRepoServerKMSPolicy"
+  role = aws_iam_role.argocd_repo_server_role.id
 
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
       Effect = "Allow"
       Action = [
-        "secretsmanager:GetSecretValue",
-        "secretsmanager:DescribeSecret"
+        "kms:Decrypt",
+        "kms:DescribeKey"
       ]
-      # Scope to only secrets under the "eks/" prefix to follow least-privilege.
-      Resource = "arn:aws:secretsmanager:*:*:secret:eks/*"
+      Resource = aws_kms_key.secrets.arn
     }]
   })
 }
