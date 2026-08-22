@@ -9,3 +9,4 @@ patchesStrategicMerge:
   - argocd-cm.yaml
   - argocd-server-patch.yaml
   - argocd-scheduling-patch.yaml
+  - argocd-repo-server-patch.yaml

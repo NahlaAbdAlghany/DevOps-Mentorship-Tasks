@@ -43,6 +43,7 @@ Plain Secret (local only)
 | File | Secret name | Namespace | Keys |
 |---|---|---|---|
 | `grafana-admin-secret.enc.yaml` | `grafana-admin-secret` | `monitoring` | `admin-user`, `admin-password` |
+| `gitea-admin-secret.enc.yaml` | `gitea-admin-secret` | `gitea` | `username`, `password` |
 
 ## Adding a new secret
 
