@@ -57,3 +57,7 @@ postgresql-ha:
   persistence:
     storageClass: gp3
     size: 10Gi
+
+valkey-cluster:
+  persistence:
+    storageClass: gp3
