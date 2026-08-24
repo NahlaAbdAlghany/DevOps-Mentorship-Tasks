@@ -97,14 +97,24 @@ ArgoCD picks up the change, ksops decrypts via KMS, and the plain Secret appears
 
 ## Key management
 
-The KMS key is managed in Terraform (`eks-cluster/modules/eks/kms.tf`):
+The KMS key is managed in its own Terraform module and state, **`secrets-kms/`** —
+deliberately separate from `eks-cluster/`. Every secret ever committed to Git is
+encrypted against this exact key; if it lived in `eks-cluster/`'s state, a
+`terraform destroy` + `apply` cycle on the cluster would destroy and recreate the
+key with a brand-new key ID, permanently breaking every `*.enc.yaml` in the repo.
+Keeping it in a separate state means `eks-cluster/` can be destroyed and rebuilt
+freely without ever touching this key. `eks-cluster/` reads the ARN read-only via
+a `terraform_remote_state` data source (see `eks-cluster/main.tf`) and grants
+`argocd-repo-server` decrypt access to it.
+
 - **Key rotation**: enabled (AWS rotates the backing key material annually)
-- **Deletion window**: 30 days (gives time to cancel an accidental key deletion)
+- **Deletion window**: 30 days (`lifecycle.prevent_destroy = true` also blocks
+  an accidental `terraform destroy` inside `secrets-kms/` itself)
 - **Access**: scoped to `argocd-repo-server` for decrypt; developers need `kms:Encrypt` + `kms:GenerateDataKey` locally
 
 To get the key ARN after `terraform apply`:
 ```powershell
-terraform -chdir=eks-cluster output sops_kms_key_arn
+terraform -chdir=secrets-kms output kms_key_arn
 ```
 
 ## SOPS configuration

@@ -212,7 +212,7 @@ resource "aws_iam_role_policy" "argocd_repo_server_kms_policy" {
         "kms:Decrypt",
         "kms:DescribeKey"
       ]
-      Resource = aws_kms_key.secrets.arn
+      Resource = var.sops_kms_key_arn
     }]
   })
 }

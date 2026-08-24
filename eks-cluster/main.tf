@@ -1,3 +1,16 @@
+# ─── SOPS KMS Key (persistent, separate state) ───────────────────────────────
+# Lives in ../secrets-kms, never destroyed alongside this cluster — see that
+# module's main.tf for why. Read-only here.
+
+data "terraform_remote_state" "secrets_kms" {
+  backend = "s3"
+  config = {
+    bucket = "nahla-terraform-state-686893581621"
+    key    = "secrets-kms/us-west-2/terraform.tfstate"
+    region = "us-west-2"
+  }
+}
+
 # ─── VPC Module ──────────────────────────────────────────────────────────────
 # Creates: VPC, public subnets, IGW, route tables, SSH security group
 
@@ -21,6 +34,9 @@ module "eks" {
 
   # Security group attached to nodes — allows SSH from ssh_cidr (defined in vpc module)
   node_ssh_security_group_id = module.vpc.node_ssh_sg_id
+
+  # SOPS KMS key ARN, from the persistent secrets-kms state (see above)
+  sops_kms_key_arn = data.terraform_remote_state.secrets_kms.outputs.kms_key_arn
 
   # Worker node group sizing
   capacity_type  = var.capacity_type

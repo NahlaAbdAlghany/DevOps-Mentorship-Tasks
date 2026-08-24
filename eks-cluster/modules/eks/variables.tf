@@ -3,6 +3,11 @@ variable "subnet_ids" {
   type        = list(string)
 }
 
+variable "sops_kms_key_arn" {
+  description = "ARN of the SOPS KMS key (managed in ../../../secrets-kms), granted to the ArgoCD repo-server role for decrypt"
+  type        = string
+}
+
 variable "cluster_name" {
   description = "Name of the EKS cluster"
   type        = string
